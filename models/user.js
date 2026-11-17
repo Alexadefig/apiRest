@@ -1,25 +1,30 @@
-import mongoose from ("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            require: [ true,"El nombre de usuario es obligatorio"],
+            required: [true, "El nombre de usuario es obligatorio"],
             trim: true,
         },
 
-        email:{
-            type:String,
-            require: [true, "El mail es obligatorio"],
+        email: {
+            type: String,
+            required: [true, "El mail es obligatorio"],
             unique: true,
-            lowecase: true,
-            trim:true,
+            lowercase: true,
+            trim: true,
         },
-            role:{
-            type:String,
-            enum: ["user","admin"],
-            default:"user",
+        role: {
+            type: String,
+            enum: ["user", "admin"],
+            default: "user",
         },
-    });
+    },
+    {
+        timestamps: true,
+        versionKey: false,
+    },
+);
 
-export default mongoose.model("userSchema");
+export default mongoose.model("User", userSchema);
