@@ -1,0 +1,43 @@
+# URL base cargada desde API_URL en el archivo .env
+@baseUrl = {{ dotenv API_URL}}
+
+# ID real de un producto obtenido al ejecutar primero la solicitud POST o GET
+@productId =
+
+### Crear un producto
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+    "name": "Monitor Gaming 27 pulgadas",
+    "description": "Panel IPS 16Hz 1ms QHD",
+    "price": 249.99,
+    "stock": 15,
+    "category": "perifericos"
+}
+
+### Obtener todos los productos
+GET {{baseUrl}}
+Accept: application/json
+
+### Obtener un producto por su ID
+GET {{baseUrl}}/{{productId}}
+Accept: application/json
+
+### Actualizar el precio y el stock de un producto
+PUT {{baseUrl}}/{{productId}}
+Content-Type: application/json
+
+{
+    "price": 219.99,
+    "stock": 10
+}
+
+### Eliminar un producto por su ID
+DELETE {{baseUrl}}/{{productId}}
+
+### Solicitud de ruta inexistente: sirve para probar el error 404
+GET {{baseUrl}}/ruta-falsa
+
+### Solicitud con un ID inválido: sirve para probar el manejo de errores
+GET {{baseUrl}}/123-id-invalido
